@@ -3,13 +3,13 @@ from __future__ import annotations
 import click
 from loguru import logger
 
-APP = "pathfinder"
+APP = "jobgrep"
 
 
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
-@click.version_option(package_name="pathfinder")
+@click.version_option(package_name="jobgrep")
 def cli() -> None:
-    """pathfinder."""
+    """jobgrep."""
 
 
 @cli.command()
