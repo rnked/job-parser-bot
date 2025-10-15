@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: mixed-line-ending
+      - id: detect-private-key
+      - id: debug-statements
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.7
+    hooks:
+      - id: ruff
+        args: [--fix]
+        exclude: "^notebooks/.*\\.ipynb$"
+      - id: ruff-format
+        exclude: "^notebooks/.*\\.ipynb$"
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        files: "^src/|^tests/"
+        additional_dependencies:
+          - types-requests
+          - types-setuptools
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa-ruff
+        name: nbqa ruff (lint .ipynb)
+        args: [--fix]
+        files: "\\.ipynb$"
+      - id: nbqa-ruff-format
+        name: nbqa ruff-format (.ipynb)
+        files: "\\.ipynb$"

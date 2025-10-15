@@ -1,0 +1,57 @@
+[project]
+name = "job-parser-bot"
+version = "0.1.0"
+description = "Project description"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "click~=8.3.0",
+  "loguru~=0.7.3",
+]
+
+[dependency-groups]
+dev = [
+  "pytest~=8.4.0",
+  "pytest-cov~=6.2.0",
+  "ruff~=0.6.7",
+  "mypy>=1.10,<2.0",
+  "nbqa~=1.9.1",
+  "pre-commit~=4.3.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E","F","I","UP","B","C4"]
+ignore = ["E203","E501"]
+
+[tool.mypy]
+python_version = "3.12"
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+ignore_missing_imports = true
+pretty = true
+show_error_codes = true
+mypy_path = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q -ra --strict-markers --cov=src --cov-report=term-missing"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+skip_covered = true
+show_missing = true
+
+[tool.uv]
+package = true
+
+[project.scripts]
+pf = "pathfinder.cli:main"
